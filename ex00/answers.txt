@@ -1,0 +1,13 @@
+-QUESTION -1- Output a list of installed packages and their versions:
+    python -m pip list (-o, outdated; -u, uptodate; ........)
+
+-QUESTION -2- Show the package metadata of numpy:
+    python -m pip show package_name (--verbose : to show all the information about a package)
+
+-QUESTION -3- Remove the package numpy:
+    pip uninstall package_name
+
+-QUESTION -4- (Re)install the package numpy:
+    pip install package_name
+-QUESTION -5- Freeze your python packages and their versions in a requirements.txt:
+    python -m pip freeze > requirements.txt

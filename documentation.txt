@@ -1,0 +1,18 @@
+1- List Installed Packages With Pip:
+    Both  pip list  and  pip freeze  will generate a list of installed packages,
+    just with differently formatted results. Keep in mind that  pip list  will list 
+    ALL installed packages (regardless of how they were installed).
+    while  pip freeze  will list only everything installed by Pip.
+2-  pip install -r requirements.txt:
+    to install all the packages (dependencies) listed in the requirements.txt
+
+3 - In practice, a module usually corresponds to one .py file containing Python code.
+
+4- In practice, a package typically corresponds to a file directory containing Python files
+ and other directories. To create a Python package yourself, you create a 
+ directory and a file named __init__.py inside it. The __init__.py file
+ contains the contents of the package when it’s treated as a module. It can be left empty.
+
+ 5- HOW TO USE PYCODESTYLE:
+    - pycodestyle --first optparse.py
+    - pycodestyle --show-source --show-pep8 testsuite/E40.py
