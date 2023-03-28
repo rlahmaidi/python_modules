@@ -1,10 +1,12 @@
+import sys
+
 cookbook = {
             "Sandwich" : {"ingredient" : ["ham", "bread", "cheese" , "tomatoes"], "meal" : "lunch", "prep_time" : 10},
             "Cake" : {"ingredient" : ["flour", "sugar", "eggs"], "meal" : "dessert", "prep_time" :  60},
             "Salad" : {"ingredient" : ["avocado", "arugula", "tomatoes", "spinach"], "meal" : "lunch", "prep_time" : 15}
 }
 #1. A function that print all recipe names.
-def all_recipe_names():
+def all_recipes_names():
     for key in cookbook:
         print(key)
     return
@@ -42,14 +44,51 @@ def add_recipe():
             break
         ing_list.append(ingredient)
     meal = input("what is the type  of your recipe?\n")
-    prep_time = input("how much time your recipe takes?\n")
+    while True:
+        prep_time = input("how much time your recipe takes(NB: should be an integer)\n")
+        if prep_time.isdigit() is True:
+           break 
+    cookbook[name] = {"ingredient" : ing_list, "meal" : meal, "prep_time" : int(prep_time)}
+    return
+
+def print_usage():
+    print("\n\nList of available option:")
+    print("     1: Add a recipe")
+    print("     2: Delete a recipe")
+    print("     3: Print a recipe")
+    print("     4: Print the cookbook")
+    print("     5: Quit")
+    return
+
+def  print_cookbook():
+    for key in cookbook.keys():
+        recipe_details(key)
+
+
+def call_appropriate_fun(inp):
+    if inp is 1:
+        add_recipe()
+    if inp is 2:
+        recipe_name = input("Please enter a recipe name to delete: \n")
+        delete_recipe(recipe_name)
+    if inp is 3:
+        recipe_name = input("Please enter a recipe name to get its details:\n")
+        recipe_details(recipe_name)
+    if inp is 4:
+        print_cookbook()
+    if inp is 5:
+        print("Cookbook closed. Goodbye !")
+        sys.exit()
     return
 
 
-all_recipe_names()
-add_recipe()
-# recipe_details("Cake")
-# delete_recipe("Cake")
-# recipe_details("Cake")
-all_recipe_names()
-#print(cookbook)
+if __name__ == "__main__":
+    print("Welcome to the Python Cookbook !")
+    while True:
+        print_usage()
+        inp = input("Please select an option:\n")
+        
+        if inp.isdigit() is False or int(inp) > 5 or int(inp) < 1:
+            print("Sorry, this option does not exist.")
+            continue
+        call_appropriate_fun(int(inp))
