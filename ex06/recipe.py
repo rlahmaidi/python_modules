@@ -1,19 +1,22 @@
 import sys
 
 cookbook = {
-            "Sandwich" : {"ingredient" : ["ham", "bread", "cheese" , "tomatoes"], "meal" : "lunch", "prep_time" : 10},
-            "Cake" : {"ingredient" : ["flour", "sugar", "eggs"], "meal" : "dessert", "prep_time" :  60},
-            "Salad" : {"ingredient" : ["avocado", "arugula", "tomatoes", "spinach"], "meal" : "lunch", "prep_time" : 15}
+            "Sandwich": {"ingredient": ["ham", "bread", "cheese", "tomatoes"], "meal": "lunch", "prep_time": 10},
+            "Cake": {"ingredient": ["flour", "sugar", "eggs"], "meal": "dessert", "prep_time":  60},
+            "Salad": {"ingredient": ["avocado", "arugula", "tomatoes", "spinach"], "meal": "lunch", "prep_time": 15}
 }
-#1. A function that print all recipe names.
+
+
+# 1. A function that print all recipe names.
 def all_recipes_names():
     for key in cookbook:
         print(key)
     return
 
-#2. A function that takes a recipe name and print its details.
+
+# 2. A function that takes a recipe name and print its details.
 def recipe_details(recipe_name):
-    if recipe_name  not in cookbook:
+    if recipe_name not in cookbook:
         print("%s: recipe dosen't exist in the cookbook" % (recipe_name))
     else:
         print("recipe for %s:" % (recipe_name))
@@ -21,8 +24,9 @@ def recipe_details(recipe_name):
         print("             To be eaten for: %s" % cookbook[recipe_name]["meal"])
         print("             Takes %d minutes of cooking." % cookbook[recipe_name]["prep_time"])
     return
-        
-#3. A function that takes a recipe name and delete it.
+
+
+# 3. A function that takes a recipe name and delete it.
 def delete_recipe(recipe_name):
     if recipe_name in cookbook:
         del cookbook[recipe_name]
@@ -31,8 +35,9 @@ def delete_recipe(recipe_name):
         print("the recipe you want to delete dosen't exist in the cookbook")
     return
 
-#4. A function that add a recipe from user input. You will need a name, a list of
-#ingredient, a meal type and a preparation time.
+
+# 4. A function that add a recipe from user input. You will need a name, a list of
+# ingredient, a meal type and a preparation time.
 def add_recipe():
     name = input("what is the name of your recipe:\n")
     ingredient = " "
@@ -47,9 +52,10 @@ def add_recipe():
     while True:
         prep_time = input("how much time your recipe takes(NB: should be an integer)\n")
         if prep_time.isdigit() is True:
-           break 
-    cookbook[name] = {"ingredient" : ing_list, "meal" : meal, "prep_time" : int(prep_time)}
+            break
+    cookbook[name] = {"ingredient": ing_list, "meal": meal, "prep_time": int(prep_time)}
     return
+
 
 def print_usage():
     print("\n\nList of available option:")
@@ -60,7 +66,8 @@ def print_usage():
     print("     5: Quit")
     return
 
-def  print_cookbook():
+
+def print_cookbook():
     for key in cookbook.keys():
         recipe_details(key)
 
@@ -87,7 +94,7 @@ if __name__ == "__main__":
     while True:
         print_usage()
         inp = input("Please select an option:\n")
-        
+
         if inp.isdigit() is False or int(inp) > 5 or int(inp) < 1:
             print("Sorry, this option does not exist.")
             continue

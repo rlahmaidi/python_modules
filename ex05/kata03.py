@@ -2,4 +2,4 @@
 kata = "The right format"
 
 if __name__ == "__main__":
-    print("-------------------------%s"% kata, end=" ")
+    print("-------------------------%s" % kata, end=" ")

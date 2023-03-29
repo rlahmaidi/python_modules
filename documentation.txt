@@ -16,3 +16,5 @@
  5- HOW TO USE PYCODESTYLE:
     - pycodestyle --first optparse.py
     - pycodestyle --show-source --show-pep8 testsuite/E40.py
+
+6- cut -c 10,18 : cut the two character 10 and 18.

@@ -1,8 +1,9 @@
-import  sys
+dic = {
+    1 : "one",
+    2 : "two",
+    3 : "three"
+}
 
-argv = sys.argv
-
-if __name__ == "__main__":
-    text = int(argv[1])
-    print("the value is: 0", text)
-    print("the type is:", type(text))
+print(dic)
+for i in dic.items():
+    print(i)
