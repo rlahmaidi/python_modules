@@ -18,3 +18,33 @@
     - pycodestyle --show-source --show-pep8 testsuite/E40.py
 
 6- cut -c 10,18 : cut the two character 10 and 18.
+
+7- The dir function returns a list of all the attributes and methods defined on any Python object.
+
+8- In Python3, all classes implicitly inherit from the built-in object base class
+
+9 - It's possible to add a new attribute to a class object after its instantiation:
+        simply like this : green.next_color = 'red'(for an instance of a class , not the class itself)
+
+10 - We can delete any attribute of a class object using the del statement:
+        like this: del yellow.color(only for an object of the class, not the whole class)
+
+11 - Class and Instance Variables
+        The difference between class and instance variables is where their values were assigned in a 
+        class definition, which also determines the scope of the variables.
+
+        Class variables: assigned in the class declaration but outside any method definition 
+        (including the class constructor). They are related to all object instances of that class.
+        Instance variables: assigned inside a class method or constructor definition. They are unique 
+        to each object instance of that class.
+
+12 - The all() function returns True if all elements in the given iterable are true. If not, it returns False.
+
+Example
+boolean_list = ['True', 'True', 'True']
+
+# check if all elements are true
+result = all(boolean_list)
+print(result)
+
+# Output: True

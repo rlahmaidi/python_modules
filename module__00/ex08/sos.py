@@ -10,7 +10,7 @@ if __name__ == "__main__":
     text = ""
     for i in range(1, len(sys.argv) - 1):
         text = text + sys.argv[i] + " "
-    text = text +sys.argv[len(sys.argv) - 1]
+    text = text + sys.argv[len(sys.argv) - 1]
     punc = string.punctuation
     for i in text:
         if i in punc:
@@ -19,7 +19,8 @@ if __name__ == "__main__":
     text = text.lower()
     with open('morse_code.json') as morse_code:
         file_content = morse_code.read()
-    #the type of file_content above is str that's why we parse it to a dictionary using loads methods
+    # the type of file_content above is str that's why
+    # we parse it to a dictionary using loads methods
     morse_codes = json.loads(file_content)
     for i in text:
-        print(morse_codes[i] + " ", end= "")
+        print(morse_codes[i] + " ", end="")
