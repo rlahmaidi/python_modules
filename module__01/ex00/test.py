@@ -1,18 +1,11 @@
-class TrafficLight:
-    '''This is an updated traffic light class'''
-    def __init__(self, color):
-        self.color = color
+from recipe import Recipe
+from book import Book
 
-    def action(self):
-        if self.color=='red':
-            print('Stop & wait')
-        elif self.color=='yellow':
-            print('Prepare to stop')
-        elif self.color=='green':
-            print('Go')
-        else:
-            print('Stop drinking 😉')
-
-yellow = TrafficLight('yellow')
-print(yellow.color)
-print(dir(yellow))
+if __name__ == "__main__":
+    recipe = Recipe(
+    "lghda", 3, 23, ["haja", "haja1", "sdf"],
+    "chi haja katkal", "lunch")
+    recipe.print_recipe_prop()
+    to_print = str(recipe)
+    #print(to_print)
+    book = Book("first book", )
