@@ -40,7 +40,16 @@ class Recipe:
             sys.exit()
         else:
             self.type = type
-        return
+
+    def __str__(self):
+        """Return the string to print with the recipe info"""
+        txt = "the recipe name is " + self.name\
+        + "\nthe cooking level is " + str(self.cook_lvl)\
+        + "\nthe cooking time is " + str(self.cook_time)\
+        + "\nthe ingredients are" + ' '.join(self.ingredients)\
+        + "\nthe description of the recipe is " + self.description\
+        + "\nthe recipe type is " + self.type
+        return txt
 
     def print_recipe_prop(self):
         print("the recipe name is ", self.name)
@@ -52,7 +61,19 @@ class Recipe:
         return
 
 
-recipe = Recipe(
+# recipe = Recipe(
+#     "lghda", 3, 23, ["haja", "haja1", "sdf"],
+#     "chi haja katkal", "lunch")
+# recipe.print_recipe_prop()
+# to_print = str(recipe)
+# print(to_print)
+
+if __name__ == "__main__":
+    recipe = Recipe(
     "lghda", 3, 23, ["haja", "haja1", "sdf"],
     "chi haja katkal", "lunch")
-recipe.print_recipe_prop()
+    # recipe.print_recipe_prop()
+    # to_print = str(recipe)
+    # print(recipe.__str__.__doc__)
+    # print(to_print)
+    print(recipe)

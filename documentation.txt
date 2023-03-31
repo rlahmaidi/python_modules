@@ -48,3 +48,6 @@ result = all(boolean_list)
 print(result)
 
 # Output: True
+
+13 - The join() method returns a string created by joining the elements of an iterable by the given string separator.
+        - string.join(iterable)

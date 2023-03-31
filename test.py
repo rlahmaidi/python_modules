@@ -1,7 +1,6 @@
-def myfun(text):
-    print(text)
-    return
+from datetime import date
+from datetime import datetime
 
-if __name__ == "__main__":
-    text = input("write something")
-    myfun(text)
+a = date(1996, 5, 1)
+print(a)
+print(type(a))
