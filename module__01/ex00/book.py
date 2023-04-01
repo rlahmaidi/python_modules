@@ -5,7 +5,7 @@ from recipe import Recipe
 
 class Book:
     recipe_lst = []
-    recipes_list = {"starter": "", "lunch": "", "dessert":""}
+    recipes_list = {"starter": [], "lunch": [], "dessert": []}
     def __init__(self, name, last_update = datetime.now, creation_date = datetime.now()):
         if isinstance(name, str) is False:
             print("name of book should be a string")
@@ -46,6 +46,13 @@ class Book:
         """Add a recipe to the book and update last_update"""
         if isinstance(recipe, Recipe) is False:# to be tested
             print("you can only add propper recipes to this book")
-        else:
-            recipe_lst.appen(recipe)
+        elif recipe.recipe_type is "desset":
+            recipes_list["dessert"].append(recipe)
+    
+    def print_dectionary(self):
+        print(recipes_list)
+
+
+if __name__ == "__main__":
+    book = Boo
     
