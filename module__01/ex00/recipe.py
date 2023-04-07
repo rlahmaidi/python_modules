@@ -74,6 +74,6 @@ if __name__ == "__main__":
     "chi haja katkal", "lunch")
     # recipe.print_recipe_prop()
     # to_print = str(recipe)
-    # print(recipe.__str__.__doc__)
+    print(recipe.__str__())
     # print(to_print)
-    print(recipe)
+    # print(recipe)

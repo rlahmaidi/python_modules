@@ -1,3 +1,4 @@
 1- go back to ex00 and write a good test.py 
-2 - go back to module_00/ex10 and do it .
-3 - go back to module_00/ex01 or 02 and do it.
+2 -  module_00/ex10 is still undon .
+3 - _00/ex01 or 02  is still undon.
+4 - read more about the super()
