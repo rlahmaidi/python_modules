@@ -34,4 +34,8 @@
 # lst1 = [1,"2"]
 # print(lst1)
 
-lst = [1,2,3,3,4,5]
+# lst = [1,2,3,3,4,5]
+
+class animal:
+    def makeSound(self):
+        print("animal made a sound")
