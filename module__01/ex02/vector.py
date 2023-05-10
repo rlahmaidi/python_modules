@@ -40,13 +40,41 @@ class Vector:
             return result
         else:
             lst = []
-            print("the lenght of values is: ", len(self.values))
             for i in range(len(self.values)):
                 lst.append([[self.values[i][0] + other.values[i][0]]])
             result = Vector(lst)
             return result
 
-    def __mul__(self,):
+    def __mul__(self,scaler):
+        if not isinstance(scaler, int):
+            print("multiplication can only be between an integer and a vector")
+            sys.exit()
+        elif self.shape[0] == 1:
+            lst = []
+            for i in range(len(self.values[0])):
+                lst.append(self.values[0][i] * scaler)
+            return Vector([lst])
+        else:
+            lst = []
+            for i in range(len(self.values)):
+                lst.append([self.values[i][0] * scaler])
+            return(Vector(lst))
+
+    def __rmul__(self,scaler):
+        if not isinstance(scaler, int):
+            print("multiplication can only be between an integer and a vector")
+            sys.exit()
+        elif self.shape[0] == 1:
+            lst = []
+            for i in range(len(self.values[0])):
+                lst.append(self.values[0][i] * scaler)
+            return Vector([lst])
+        else:
+            lst = []
+            for i in range(len(self.values)):
+                lst.append([self.values[i][0] * scaler])
+            return(Vector(lst))
+
         
 
 
@@ -75,14 +103,29 @@ if __name__ == "__main__":
     # print("the Transpose of second vector is: ")
     # second_vector.T()
     #       ADD
-    #   column vector
-    first_vector = Vector([[1], [2], [5]])
-    second_vector = Vector([[1],[2],[4]])
-    result = first_vector + second_vector
-    result.print_data()
+    #  + column vector
+    # first_vector = Vector([[1], [2], [5]])
+    # second_vector = Vector([[1],[2],[4]])
+    # result = first_vector + second_vector
+    # result.print_data()
+    # # + row vector
+    # print("************** row vector tests*********")
+    # v1 = Vector([[1,2,3]])
+    # v2 = Vector([[1,3,5]])
+    # v3 =  v1 + v2
+    # v3.print_data()
+
+    #       __mul__ 
+        # row vector
+    v1 = Vector([[1,2,4,5]])
+    v2 = v1 * 2
+    v2.print_data()
+        # culumn vector
+    v1 = Vector([[1],[2],[3],[4.4]])
+    v2 =  v1 * 2
+    v2.print_data()
+    #  rmul 
     # row vector
-    print("**************row vector tests*********")
-    v1 = Vector([[1,2,3]])
-    v2 = Vector([[1,3,5]])
-    v3 =  v1 + v2
-    v3.print_data()
+    v1 = Vector([[1,2,4,5.5]])
+    v2 = 3.2 * v1
+    v2.print_data()
