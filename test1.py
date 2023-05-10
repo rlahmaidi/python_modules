@@ -53,6 +53,9 @@
   
 # # Display the sum of the two list  
 # print (" Sum of the list 1 and list 2 is : " + str(res_lt)) 
-
-for i in range(3):
-    print(i)
+print(3 * "rachid")
+class test:
+    def __rachid__(self):
+        print("chi la3ba")
+t = test()
+t.__rachid__()
