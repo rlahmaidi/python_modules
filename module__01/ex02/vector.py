@@ -4,7 +4,20 @@ class Vector:
     def __init__(self,values=[[]]):
         self.values = values
         self.shape =(len(self.values), len(self.values[0]))
-
+    def __init__(self, number):
+        self.values = []
+        for i in range(0, number):
+            self.values.append([i/1.0])
+        self.shape =(len(self.values), len(self.values[0]))
+    def __init__(self,range_beg, rang_end):
+        if range_beg > rang_end:
+            print("the first number should be the smallest!!!")
+            sys.exit()
+        else:
+            self.values = []
+            for i in range(range_beg, rang_end):
+                self.values.append([i/1.0])
+            self.shape =(len(self.values), len(self.values[0]))
     def dot(self,vector):
         summ = 0
         if not isinstance(vector, Vector):
@@ -98,11 +111,17 @@ class Vector:
         print("the values argument: ", self.values)
         print("the shape is : ", self.shape)
 
+# __str__ and ___rpr__ should be implemented
+
+
 if __name__ == "__main__":
+    #       constructors 
     # row_vector = Vector([[1, 2, 3, 5]])
     # column_vector = Vector([[1],[2],[4]])
     # row_vector.print_data()
     # column_vector.print_data()
+    v1 = Vector(4,2)
+    v1.print_data()
     # #the dot product of row vector
     # first_vector = Vector([[1, 2, 3]])
     # second_vector = Vector([[4, 5, 6]])
@@ -147,6 +166,6 @@ if __name__ == "__main__":
     # v2.print_data()
     #       truedev
     # row vector
-    v1 = Vector([[1,2,3.3]])
-    v2 = 2.0/v1
-    v2.print_data()
+    # v1 = Vector([[1,2,3.3]])
+    # v2 = 2.0/v1
+    # v2.print_data()
