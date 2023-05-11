@@ -46,7 +46,7 @@ class Vector:
             return result
 
     def __mul__(self,scaler):
-        if not isinstance(scaler, int):
+        if not isinstance(scaler, (int, float)):
             print("multiplication can only be between an integer and a vector")
             sys.exit()
         elif self.shape[0] == 1:
@@ -61,7 +61,7 @@ class Vector:
             return(Vector(lst))
 
     def __rmul__(self,scaler):
-        if not isinstance(scaler, int):
+        if not isinstance(scaler, (int, float)):
             print("multiplication can only be between an integer and a vector")
             sys.exit()
         elif self.shape[0] == 1:
@@ -74,8 +74,24 @@ class Vector:
             for i in range(len(self.values)):
                 lst.append([self.values[i][0] * scaler])
             return(Vector(lst))
-
-        
+    def __truediv__(self, sclar):
+        if not isinstance(sclar, (float, int)):
+            print("vetcors can only be devided by floats")
+            sys.exit()
+        if self.shape[0] == 1:
+            lst = []
+            print("we are in row vector")
+            for i in range(len(self.values[0])):
+                lst.append(self.values[0][i] / sclar)
+            return(Vector([lst]))
+        else:
+            lst = []
+            for i in range(len(self.values)):
+                lst.append([self.values[i][0] / sclar])
+            return(Vector(lst))
+    
+    def __rtruediv__(self, scalar):
+        raise NotImplementedError("NotImplementedError: Division of a scalar by a Vector is not defined here.")
 
 
     def print_data(self):
@@ -116,16 +132,21 @@ if __name__ == "__main__":
     # v3.print_data()
 
     #       __mul__ 
-        # row vector
-    v1 = Vector([[1,2,4,5]])
-    v2 = v1 * 2
-    v2.print_data()
-        # culumn vector
-    v1 = Vector([[1],[2],[3],[4.4]])
-    v2 =  v1 * 2
-    v2.print_data()
-    #  rmul 
+    #     # row vector
+    # v1 = Vector([[1,2,4,5]])
+    # v2 = v1 * 2
+    # v2.print_data()
+    #     # culumn vector
+    # v1 = Vector([[1],[2],[3],[4.4]])
+    # v2 =  v1 * 2
+    # v2.print_data()
+    # #  rmul 
+    # # row vector
+    # v1 = Vector([[1,2,4,5.5]])
+    # v2 = 3.2 * v1
+    # v2.print_data()
+    #       truedev
     # row vector
-    v1 = Vector([[1,2,4,5.5]])
-    v2 = 3.2 * v1
+    v1 = Vector([[1,2,3.3]])
+    v2 = 2.0/v1
     v2.print_data()
