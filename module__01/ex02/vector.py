@@ -1,14 +1,19 @@
 import sys
+from multipledispatch import dispatch
+
 
 class Vector:
+    @dispatch(list)
     def __init__(self,values=[[]]):
         self.values = values
         self.shape =(len(self.values), len(self.values[0]))
+    @dispatch(int)
     def __init__(self, number):
         self.values = []
         for i in range(0, number):
             self.values.append([i/1.0])
         self.shape =(len(self.values), len(self.values[0]))
+    @dispatch(int, int)
     def __init__(self,range_beg, rang_end):
         if range_beg > rang_end:
             print("the first number should be the smallest!!!")
@@ -18,6 +23,21 @@ class Vector:
             for i in range(range_beg, rang_end):
                 self.values.append([i/1.0])
             self.shape =(len(self.values), len(self.values[0]))
+    
+    def __str__(self):
+        ret = "this is a vector class, it implements \
+                \nnumirecal claculations operationsm over vectors:\
+                \n- vector-vector operations\
+                \n-vector-scalar operations"
+        return ret
+
+    def __repr__(self):
+        ret = "this is a vector class, it implements \
+                \nnumirecal claculations operationsm over vectors:\
+                \n- vector-vector operations\
+                \n-vector-scalar operations"
+        return ret
+
     def dot(self,vector):
         summ = 0
         if not isinstance(vector, Vector):
@@ -54,14 +74,72 @@ class Vector:
         else:
             lst = []
             for i in range(len(self.values)):
-                lst.append([[self.values[i][0] + other.values[i][0]]])
+                lst.append([self.values[i][0] + other.values[i][0]])
+            result = Vector(lst)
+            return result
+
+    def __radd__(self, other):
+        if not isinstance(other, Vector):
+            print("please provide a 2 proper Vector")
+            sys.exit()
+        elif other.shape != self.shape:
+            print("summ can only done between 2 vectors of the same shape")
+        elif self.shape[0] == 1:
+            lst = []
+            for i in range(len(self.values[0])):
+                lst.append(self.values[0][i] + other.values[0][i])
+            result = Vector([lst])
+            return result
+        else:
+            lst = []
+            for i in range(len(self.values)):
+                lst.append([self.values[i][0] + other.values[i][0]])
+            result = Vector(lst)
+            return result
+
+
+    def __sub__(self, other):
+        if not isinstance(other, Vector):
+            print("please provide a 2 proper Vector")
+            sys.exit()
+        elif other.shape != self.shape:
+            print("substraction can only done between 2 vectors of the same shape")
+        elif self.shape[0] == 1:
+            lst = []
+            for i in range(len(self.values[0])):
+                lst.append(self.values[0][i] - other.values[0][i])
+            result = Vector([lst])
+            return result
+        else:
+            lst = []
+            for i in range(len(self.values)):
+                lst.append([self.values[i][0] - other.values[i][0]])
+            result = Vector(lst)
+            return result
+
+    def __rsub__(self, other):
+        if not isinstance(other, Vector):
+            print("please provide a 2 proper Vector")
+            sys.exit()
+        elif other.shape != self.shape:
+            print("substraction can only done between 2 vectors of the same shape")
+        elif self.shape[0] == 1:
+            lst = []
+            for i in range(len(self.values[0])):
+                lst.append(self.values[0][i] - other.values[0][i])
+            result = Vector([lst])
+            return result
+        else:
+            lst = []
+            for i in range(len(self.values)):
+                lst.append([self.values[i][0] - other.values[i][0]])
             result = Vector(lst)
             return result
 
     def __mul__(self,scaler):
         if not isinstance(scaler, (int, float)):
-            print("multiplication can only be between an integer and a vector")
-            sys.exit()
+            raise NotImplementedError("NotImplementedError:\
+            multiplication can only be between an scalar and a vector")
         elif self.shape[0] == 1:
             lst = []
             for i in range(len(self.values[0])):
@@ -75,7 +153,8 @@ class Vector:
 
     def __rmul__(self,scaler):
         if not isinstance(scaler, (int, float)):
-            print("multiplication can only be between an integer and a vector")
+            raise NotImplementedError("NotImplementedError:\
+            multiplication can only be between an scalar and a vector")
             sys.exit()
         elif self.shape[0] == 1:
             lst = []
@@ -93,7 +172,6 @@ class Vector:
             sys.exit()
         if self.shape[0] == 1:
             lst = []
-            print("we are in row vector")
             for i in range(len(self.values[0])):
                 lst.append(self.values[0][i] / sclar)
             return(Vector([lst]))
@@ -169,3 +247,4 @@ if __name__ == "__main__":
     # v1 = Vector([[1,2,3.3]])
     # v2 = 2.0/v1
     # v2.print_data()
+    
