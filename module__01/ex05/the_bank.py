@@ -29,7 +29,10 @@ class Bank(object):
         # test if new_account is an Account() instance and if
         # it can be appended to the attribute accounts
         # ... Your code ...
-        self.accounts.append(new_account)
+        if isinstance((new_account, Account)) and new_account not in self.accounts:
+            self.accounts.append(new_account)
+        else:
+            print("either the acount already exists or it not really an acount")
 
     def transfer(self, origin, dest, amount):
         """" Perform the fund transfer
@@ -39,7 +42,7 @@ class Bank(object):
         @return True if success, False if an error occured
         """
         # ... Your code ...
-        
+
     def fix_account(self, name):
         """ fix account associated to name if corrupted
         @name: str(name) of the account
