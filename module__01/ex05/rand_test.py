@@ -35,13 +35,15 @@
 # else:
 #     print("no")
 class test:
-    def __init__(self, name, id):
+    def __init__(self, name, id, value):
         self.name = name
         self.id = id
+        self.value = value
     def  test1(self):
         print(self.name)
     def test2(self):
         self.test1()
 
-t = test("rachid", 10)
-t.test2()
+t = test("rachid", 10, 12)
+lst = "value"
+print(t.lst)

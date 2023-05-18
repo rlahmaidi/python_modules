@@ -13,16 +13,16 @@ if __name__ == "__main__":
         zip='100-064',
         value=6460.0,
         ref='58ba2b9954cd278eda8a84147ca73c87',
-        info=None
+        info=None,
+        bbb = 10,
+        bravo = "name"
     ))
 
     if bank.transfer('William John', 'Smith Jane', 1000.0) is False:
         print('Failed')
-        bank.print_bank_acounts()
-        bank.fix_account('William John')
-        bank.fix_account('Smith Jane')
-        print("after fix*********")
-        bank.print_bank_acounts()
+    
+    bank.fix_account('William John')
+    bank.fix_account('Smith Jane')
 
     if bank.transfer('William John', 'Smith Jane', 1000.0) is False:
         print('Failed')
