@@ -32,6 +32,6 @@ def generator(text, sep=" ", option=None):
 
 text = "dangalo bangalo my sorted my sengalo my sorted"
 it = generator(text, "my", "unique")
-# print(next(it))
-# print(next(it))
-# print(next(it))
+print(next(it))
+print(next(it))
+print(next(it))
