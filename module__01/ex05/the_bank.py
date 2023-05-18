@@ -1,7 +1,9 @@
 import sys
 
+
 class Account(object):
     ID_COUNT = 1
+
     def __init__(self, name, **kwargs):
         self.__dict__.update(kwargs)
         self.id = self.ID_COUNT
@@ -13,9 +15,9 @@ class Account(object):
             raise AttributeError("Attribute value cannot be negative.")
         if not isinstance(self.name, str):
             raise AttributeError("Attribute name must be a str object.")
-        
+
         def transfer(self, amount):
-         self.value += amount
+            self.value += amount
 
 
 class Bank(object):
@@ -32,39 +34,39 @@ class Bank(object):
         # it can be appended to the attribute accounts
         # ... Your code ...
         if isinstance(new_account, Account) and\
-         new_account not in self.accounts:
+                new_account not in self.accounts:
             self.accounts.append(new_account)
         else:
-            print("either the acount already exists or it not really an acount")
+            print("either the acount already\
+             exists or it not really an acount")
 
-    def name_in_accounts(self,name):
+    def name_in_accounts(self, name):
         for i in self.accounts:
             if name == i.name:
                 return True
         return False
 
-    def zip(self,account):
+    def zip(self, account):
         for key in account.__dict__.keys():
             if key[0:3] == "zip":
                 return True
         return False
-    
+
     def addr(self, account):
         for key in account.__dict__.keys():
             if key[0:4] == "addr":
                 return True
         return False
-    
-    def account_name_to_indice(self,name):
+
+    def account_name_to_indice(self, name):
         i = 0
         for account in self.accounts:
             if account.name == name:
                 return i
-            i +=1
+            i += 1
         return None
 
-
-    def corrupted(self,account):
+    def corrupted(self, account):
         # account attribute start with b
         for key in account.__dict__.keys():
             if key[0] == "b":
@@ -80,7 +82,7 @@ class Bank(object):
             return True
 
         # acount got an even numbe of attr
-        if len(account.__dict__) %2 == 0 :
+        if len(account.__dict__) % 2 == 0:
             print("corr: even numbe of attr")
             return True
         # name, id and value not included in acount attr
@@ -88,7 +90,7 @@ class Bank(object):
             print("corr: name or vlaue or id dosen't exist")
             return True
         # name is not a string
-        if not isinstance(account.__dict__["name"],str):
+        if not isinstance(account.__dict__["name"], str):
             print("name isn't str")
             return True
         # id not being an int
@@ -96,11 +98,10 @@ class Bank(object):
             print("id isn't int")
             return True
         # value not being an int or a float
-        if not isinstance(account.__dict__["value"],(int, float)):
+        if not isinstance(account.__dict__["value"], (int, float)):
             print("value isn't int or float")
             return True
         return False
-        
 
     def transfer(self, origin, dest, amount):
         """" Perform the fund transfer
@@ -133,8 +134,8 @@ class Bank(object):
             return True
         else:
             # print("transfer succeded")
-            dest.value +=amount
-            origin.value -=amount
+            dest.value += amount
+            origin.value -= amount
             return True
 
     def fix_account(self, name):
@@ -149,9 +150,9 @@ class Bank(object):
             if key[0] == "b":
                 lst.append(key)
         for key in lst:
-            delattr(self.accounts[indice],key)
+            delattr(self.accounts[indice], key)
         # acount got an even numbe of attr
-        if self.name_in_accounts(name)is False:
+        if self.name_in_accounts(name) is False:
             return False
         indice = self.account_name_to_indice(name)
         # name, id and value not included in acount attr
@@ -159,22 +160,21 @@ class Bank(object):
             self.accounts[indice].value = 0
         if "id" not in self.accounts[indice].__dict__.keys():
             self.accounts[indice].id = 0
-        # account has no attr zip 
+        # account has no attr zip
         if not self.zip(self.accounts[indice]):
             self.accounts[indice].zip = "chila3ba"
         # account has no attr addr
         if not self.addr(self.accounts[indice]):
             self.accounts[indice].addr = "chila3batani"
         # account have even number of attr
-        if len(self.accounts[indice].__dict__) % 2 == 0 :
+        if len(self.accounts[indice].__dict__) % 2 == 0:
             self.accounts[indice].tmp = "randomstring"
-        return True         
-            
-    
+        return True
+
     def print_bank_acounts(self):
         for acount in self.accounts:
             print("#####################")
             print("acount id:", acount.id)
-            print("acount name:",acount.name)
+            print("acount name:", acount.name)
             # print("acount value:", acount.value)
             # print(acount.__dict__)
