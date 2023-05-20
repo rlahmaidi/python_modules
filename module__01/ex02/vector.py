@@ -51,7 +51,7 @@ class Vector:
         else:
             for i in range(len(self.values)):
                 summ += self.values[i][0] * vector.values[i][0]
-        print("the . product is: ", summ)
+        return summ
     
     def T(self):
         if self.shape[0] != 1:

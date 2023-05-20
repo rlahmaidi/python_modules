@@ -38,7 +38,7 @@ class Bank(object):
             self.accounts.append(new_account)
         else:
             print("either the acount already\
-             exists or it not really an acount")
+             exists or it is not really an acount")
 
     def name_in_accounts(self, name):
         for i in self.accounts:
