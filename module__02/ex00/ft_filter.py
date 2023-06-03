@@ -1,3 +1,6 @@
+from collections.abc import Iterable
+
+
 def ft_filter(function_to_apply, iterable):
     """Filter the result of function apply to all elements of the iterable.
     Args:
@@ -7,6 +10,8 @@ def ft_filter(function_to_apply, iterable):
     An iterable.
     None if the iterable can not be used by the function.
     """
+    if not isinstance(iterable, Iterable):
+        raise TypeError(type(iterable), "object is not iterable")
     for element in iterable:
         if function_to_apply(element):
             yield element
@@ -40,3 +45,8 @@ if __name__ == "__main__":
     print('The filtered letters are:')
     for s in filtered:
         print(s)
+    print("@@@@@@@@@@ exceptins @@@@@@@")
+    x = 0
+    print("not iterable exception: ")
+    print("theirs: ", list(filter(divise_two, x)))
+    print(list(ft_filter(divise_two, x)))

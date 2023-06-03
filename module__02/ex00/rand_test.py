@@ -1,3 +1,6 @@
+#Abstract Base Classes for Containers¶
+from collections.abc import Iterable
+
 # Return double of n
 # def addition(n,m):
 #     return n + m
@@ -28,11 +31,14 @@
 # python code to demonstrate working of reduce()
  
 # importing functools for reduce()
-from  functools import reduce
+# from  functools import reduce
  
-# initializing list
-lis = [1]
+# # initializing list
+# lis = [1]
  
-# using reduce to compute sum of list
-print("The sum of the list elements is : ", end="")
-print(reduce(lambda a,b: a *b, lis))
+# # using reduce to compute sum of list
+# print("The sum of the list elements is : ", end="")
+# print(reduce(lambda a,b: a *b, lis))
+# lst = [1,2]
+# if isinstance(lst, Iterable):
+#     print("yes")
