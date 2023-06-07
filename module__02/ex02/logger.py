@@ -10,7 +10,8 @@ def log(fun):
         else:
             fun(ref)
         end = time()
-        to_print = "(cmaxime)Running: " + fun.__name__.ljust(20,) + "[ exec_time = " + str(end - start).ljust(5) + " ms ]\n"
+        exec_time = end - start
+        to_print = "(cmaxime)Running: " + fun.__name__.ljust(20,) + "[ exec_time = {ex_time: .3f}".format(ex_time = exec_time) + " ms ]\n"
         log_file = open(r"machine.log","a")
         log_file.write(to_print)
     return inner
