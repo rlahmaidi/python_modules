@@ -5,14 +5,22 @@ class CsvReader():
         self.header = header
         self.skip_top = skip_top
         self.skip_bottom = skip_bottom
-        
+        # i added this attribute myself(not required by subj)
+        self.file = None
     def __enter__(self,):
         if self.filename == None:
             return None
+        file = open("./good.csv","r")
+        self.file = file
+        print("we are printing from __enter__ at least")
+        # return self.getdata()
+        return file
+# i should remember that all of the good.csv should be replaced 
+# with self.filename
+    def __exit__(self, *args, **kwargs):
+        if self.file != None:
+            self.file.close()
         
-    # ... Your code here ...
-    def __exit__():
-        pass
 
     def getdata(self):
         """ Retrieves the data/records from skip_top to skip bottom.
@@ -58,6 +66,9 @@ if __name__ == "__main__":
     obj = CsvReader()
     # lst = obj.getheader()
     # print(lst)
-    data = obj.getdata()
-    for line in data:
-        print(line)
+    # data = obj.getdata()
+    # for line in data:
+    #     print(line)
+    with CsvReader('bad.csv') as file:
+        if file == None:
+            print("File is corrupted")
