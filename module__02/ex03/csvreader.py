@@ -13,14 +13,30 @@ class CsvReader():
     # ... Your code here ...
     def __exit__():
         pass
-    # ... Your code here ...
+
     def getdata(self):
         """ Retrieves the data/records from skip_top to skip bottom.
         Return:
         nested list (list(list, list, ...)) representing the data.
         """
-        pass
-    # ... Your code here ...
+        #  error handling will be done when i'm not that tired 
+        file = open("./good.csv","r")
+        count = 0
+        lst = []
+        for line in file:
+            if self.skip_top != 0 and count < self.skip_top:
+                # is it = or not?
+                count += 1
+                continue
+            if self.skip_bottom != 0 and count >= self.skip_bottom:
+                break
+            line = line.strip().replace(" ","").replace("\"","")
+            inner_lst = line.split(",")
+            lst.append(inner_lst)
+            count += 1
+        file.close()
+        return lst
+
     def getheader(self):
         """ Retrieves the header from csv file.
         Returns:
@@ -32,12 +48,16 @@ class CsvReader():
         #     return None
         file = open("./good.csv","r")
         line = file.readline().strip().replace(" ","").replace("\"","")
+        file.close()
         # the above line is long and hardcode-> is should change it
+        # i should try opening the file with "with"
         lst = line.split(sep = ",")
-        print(line)
-        print("this is lst ",lst)
-    # ... Your code here ...
+        return lst
 
 if __name__ == "__main__":
     obj = CsvReader()
-    obj.getheader()
+    # lst = obj.getheader()
+    # print(lst)
+    data = obj.getdata()
+    for line in data:
+        print(line)
