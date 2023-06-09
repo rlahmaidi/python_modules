@@ -113,16 +113,17 @@ if __name__ == "__main__":
     obj = CsvReader("./good.csv", ',',header = True)
     lst = obj.getheader()
     print(lst)
-    # data = obj.getdata()
-    # for line in data:
-    #     print(line)
-    # with CsvReader('good.csv', header = False, skip_top = 2, skip_bottom = 2) as file:
-    #     if file == None:
-    #         print("File is corrupted")
-    #     else:
-    #         print("File isn't corrupted")
-    #         for line in file:
-    #             print(line)
-    with CsvReader('good.csv') as file:
-        data = file.getdata()
-        header = file.getheader()
+    data = obj.getdata()
+    for line in data:
+        print(line)
+    with CsvReader('good.csv', header = False, skip_top = 2, skip_bottom = 2) as file:
+        if file == None:
+            print("File is corrupted")
+        else:
+            print("File isn't corrupted")
+            for line in file:
+                print(line)
+    # with CsvReader('good.csv') as file:
+    #     data = file.getdata()
+    #     header = file.getheader()
+    
