@@ -10,11 +10,9 @@ class CsvReader():
     def __enter__(self,):
         if self.filename == None:
             return None
-        print("the filname is ", self.filename)
-        file = open(self.filename,"r")
-        self.file = file
-        header = line = file.readline().strip().split(self.sep)
-        for line in file:
+        self.file = open(self.filename,"r")
+        header = line = self.file.readline().strip().split(self.sep)
+        for line in self.file:
             line = line.strip()
             lst = line.split(self.sep)
             if len(lst) != len(header):
@@ -22,10 +20,12 @@ class CsvReader():
             if '' in lst:
                 print("we have an empty value")
                 return None
-        # return self.getdata()
-        return file
-# i should remember that all of the good.csv should be replaced 
-# with self.filename
+        # we are at EOF so we close and open again to go back to start
+        self.file.close()
+        self.file = open(self.filename, "r")
+        return self.file
+    
+
     def __exit__(self, *args, **kwargs):
         if self.file != None:
             self.file.close()
@@ -47,7 +47,6 @@ class CsvReader():
                 continue
             if self.skip_bottom != 0 and count >= self.skip_bottom:
                 break
-            # line = line.strip().replace(" ","").replace("\"","")
             line = line.strip()
             inner_lst = line.split(self.sep)
             lst.append(inner_lst)
@@ -84,3 +83,20 @@ if __name__ == "__main__":
             print("File is corrupted")
         else:
             print("File isn't corrupted")
+            lst = []
+            count = 0
+        for line in file:
+            print("are we even entering")
+            # if self.skip_top != 0 and count < self.skip_top:
+            #     # is it = or not?
+            #     count += 1
+            #     continue
+            # if self.skip_bottom != 0 and count >= self.skip_bottom:
+            #     break
+            print(line)
+            print(count)
+            line = line.strip()
+            inner_lst = line.split(",")
+            lst.append(inner_lst)
+            count += 1
+        print(lst)
