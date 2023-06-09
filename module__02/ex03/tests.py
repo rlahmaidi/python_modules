@@ -12,9 +12,21 @@
 # with HelloContextManager() as hello:
 #     print(hello)
 #     hello[100]
-class test:
-    pass
+# class test:
+#     pass
 
-tmp = test()
-tmp.__setattr__("name", "rachid")
-print(tmp.name)
+# tmp = test()
+# tmp.__setattr__("name", "rachid")
+# print(tmp.name)
+
+st = "\nrachid,"
+sp = st.split(",")
+# sp = [1,2,3,4]
+# print(sp)
+# if '' in sp:
+#     print("yes")
+# else:
+#     print("no")
+tmp = st.strip()
+print(st)
+print(tmp)

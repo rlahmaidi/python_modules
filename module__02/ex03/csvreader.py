@@ -10,9 +10,15 @@ class CsvReader():
     def __enter__(self,):
         if self.filename == None:
             return None
-        file = open("./good.csv","r")
+        file = open(self.filename,"r")
         self.file = file
-        print("we are printing from __enter__ at least")
+        header = self.getheader()
+        for line in file:
+            lst = line.split(self.sep)
+            if len(lst) != len(header):
+                return None
+            if '' in lst:
+                return None
         # return self.getdata()
         return file
 # i should remember that all of the good.csv should be replaced 
@@ -28,7 +34,7 @@ class CsvReader():
         nested list (list(list, list, ...)) representing the data.
         """
         #  error handling will be done when i'm not that tired 
-        file = open("./good.csv","r")
+        file = open(self.filename,"r")
         count = 0
         lst = []
         for line in file:
@@ -38,8 +44,9 @@ class CsvReader():
                 continue
             if self.skip_bottom != 0 and count >= self.skip_bottom:
                 break
-            line = line.strip().replace(" ","").replace("\"","")
-            inner_lst = line.split(",")
+            # line = line.strip().replace(" ","").replace("\"","")
+            line = line.replace('\\n','')
+            inner_lst = line.split(self.sep)
             lst.append(inner_lst)
             count += 1
         file.close()
@@ -54,21 +61,23 @@ class CsvReader():
         # if self.header is False:
         #     print("we are inside header= false")
         #     return None
-        file = open("./good.csv","r")
+        file = open(self.filename,"r")
         line = file.readline().strip().replace(" ","").replace("\"","")
         file.close()
         # the above line is long and hardcode-> is should change it
         # i should try opening the file with "with"
-        lst = line.split(sep = ",")
+        lst = line.split(self.sep)
         return lst
 
 if __name__ == "__main__":
-    obj = CsvReader()
-    # lst = obj.getheader()
-    # print(lst)
-    # data = obj.getdata()
-    # for line in data:
-    #     print(line)
-    with CsvReader('bad.csv') as file:
-        if file == None:
-            print("File is corrupted")
+    obj = CsvReader("./good.csv", ',')
+    lst = obj.getheader()
+    print(lst)
+    data = obj.getdata()
+    for line in data:
+        print(line)
+    # with CsvReader('bad.csv') as file:
+    #     if file == None:
+    #         print("File is corrupted")
+    #     else:
+    #         print("File isn't corrupted")
