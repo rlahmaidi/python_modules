@@ -1,3 +1,6 @@
+from csvreader import CsvReader
+
+
 if __name__ == "__main__":
     with CsvReader('good.csv',
                    header=False, skip_top=2, skip_bottom=2) as file:
