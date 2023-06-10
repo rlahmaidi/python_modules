@@ -1,95 +1,70 @@
-# Important : when iteration over a file or wrting lines to it
-# the pointer is now at the end , close the file and open it again
-
-
 class CsvReader():
-    def __init__(self, filename=None, sep=',', header=False, skip_top=0, skip_bottom=0):
+    def __init__(self, filename=None, sep=',',\
+                header=False, skip_top=0, skip_bottom=0):
         self.filename = filename
         self.sep = sep
         self.header = header
         self.skip_top = skip_top
         self.skip_bottom = skip_bottom
-        # i added this attribute myself(not required by subj)
         self.file = None
-        self.ret_file = None
+        self.num_lines = 0
+
     def __enter__(self,):
-        if self.filename == None:
+        if self.filename is None:
+            print("filename dosen't exist esssssssssssss")
             return None
-        self.file = open(self.filename,"r")
+        self.file = open(self.filename, "r")
         header = self.file.readline().strip().split(self.sep)
         num_lines = 1
         for line in self.file:
             line = line.strip()
             lst = line.split(self.sep)
             if len(lst) != len(header):
+                print("different records ewwwwwwwwwwwww")
                 return None
             if '' in lst:
-                print("we have an empty value")
+                print("empty line in file ssssssss")
                 return None
             num_lines += 1
-        # we are at EOF so we close and open again to go back to start
-        self.file.close()
-        self.file = open(self.filename, "r")
-        if self.header is False and self.skip_bottom == self.skip_top == 0:
-            self.file.readline()
-            return self.file
-        elif self.skip_bottom != 0 or self.skip_top != 0:
-            if self.skip_bottom < 0 or self.skip_top < 0:
-                return None
-            self.ret_file = open("./return_file","w")
-            count = 0
-            lst = []
-            for line in self.file:
-                if count == 0 and self.header is False:
-                    count += 1
-                    continue
-                elif count == 0 and self.header is True:
-                    lst.append(line)
-                    count += 1
-                    continue
-                if self.skip_top != 0 and count <= self.skip_top:
-                    # is it = or not?
-                    count += 1
-                    continue
-                if self.skip_bottom != 0 and count >= num_lines - self.skip_bottom:
-                    break
-                lst.append(line)
-                count += 1
-            self.ret_file.writelines(lst)
-            self.ret_file.close()
-            self.ret_file = open("./return_file", "r")
-            self.file = self.ret_file
-            return self.file
-    
+        self.num_lines = num_lines
+        self.file.seek(0, 0)
+        if self.skip_bottom < 0 or self.skip_top < 0:
+            print("negative skip lkkkkkkkkkk")
+            return None
+        return self
 
     def __exit__(self, *args, **kwargs):
-        if self.file != None:
+        if self.file is None:
             self.file.close()
-        if self.ret_file != None:
-            self.ret_file.close()
-        
+        return True
 
-    def getdata(self):
+    def getdata(self,):
         """ Retrieves the data/records from skip_top to skip bottom.
         Return:
         nested list (list(list, list, ...)) representing the data.
         """
-    
-        # file = open(self.filename,"r")
+
         count = 0
         lst = []
         for line in self.file:
-            if self.skip_top != 0 and count < self.skip_top:
-                # is it = or not?
+            if count == 0 and self.header is False:
                 count += 1
                 continue
-            if self.skip_bottom != 0 and count >= self.skip_bottom:
+            elif count == 0 and self.header is True:
+                line = line.strip().split(self.sep)
+                lst.append(line)
+                count += 1
+                continue
+            if self.skip_top != 0 and count <= self.skip_top:
+                count += 1
+                continue
+            if self.skip_bottom != 0 and count >=\
+                    self.num_lines - self.skip_bottom:
                 break
-            line = line.strip()
-            inner_lst = line.split(self.sep)
-            lst.append(inner_lst)
+            line = line.strip().split(self.sep)
+            lst.append(line)
             count += 1
-        # file.close()
+        self.file.seek(0, 0)
         return lst
 
     def getheader(self):
@@ -101,29 +76,19 @@ class CsvReader():
         if self.header is False:
             return None
         elif self.header is True:
-            file = open(self.filename,"r")
-            line = file.readline().strip()
-            file.close()
-            # the above line is long and hardcode-> is should change it
-            # i should try opening the file with "with"
+            line = self.file.readline().strip()
+            self.file.seek(0, 0)
             lst = line.split(self.sep)
             return lst
 
+
 if __name__ == "__main__":
-    obj = CsvReader("./good.csv", ',',header = True)
-    lst = obj.getheader()
-    print(lst)
-    data = obj.getdata()
-    for line in data:
-        print(line)
-    with CsvReader('good.csv', header = False, skip_top = 2, skip_bottom = 2) as file:
-        if file == None:
-            print("File is corrupted")
-        else:
-            print("File isn't corrupted")
-            for line in file:
-                print(line)
-    # with CsvReader('good.csv') as file:
-    #     data = file.getdata()
-    #     header = file.getheader()
-    
+    with CsvReader('good.csv', header = False,\
+                        skip_top = 2, skip_bottom = 2) as file:
+        if file is None:
+            print("baaaad file it seems ")
+        data = file.getdata()
+        header = file.getheader()
+        print(header)
+        for line in data:
+            print(line)
