@@ -1,6 +1,6 @@
 class CsvReader():
-    def __init__(self, filename=None, sep=',',\
-                header=False, skip_top=0, skip_bottom=0):
+    def __init__(self, filename=None, sep=',',
+                 header=False, skip_top=0, skip_bottom=0):
         self.filename = filename
         self.sep = sep
         self.header = header
@@ -83,8 +83,8 @@ class CsvReader():
 
 
 if __name__ == "__main__":
-    with CsvReader('good.csv', header = False,\
-                        skip_top = 2, skip_bottom = 2) as file:
+    with CsvReader('good.csv',
+                   header=False, skip_top=2, skip_bottom=2) as file:
         if file is None:
             print("baaaad file it seems ")
         data = file.getdata()
