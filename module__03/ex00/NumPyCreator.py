@@ -9,7 +9,7 @@ class NumPyCreator:
             return None
         try:
             return np.array(lst)
-        except:
+        except Exception:
             return None
 
     def from_tuple(self, tpl):
@@ -17,7 +17,7 @@ class NumPyCreator:
             return None
         try:
             return np.array(tpl)
-        except:
+        except Exception:
             return None
 
     def from_iterable(self, itr):
@@ -25,7 +25,6 @@ class NumPyCreator:
         for element in itr:
             lst.append(element)
         return np.array(lst)
-
 
     def from_shape(self, shape, value=0):
         if not isinstance(shape, tuple) or len(shape) != 2:
@@ -41,7 +40,7 @@ class NumPyCreator:
                   define the shape of the array")
             sys.exit()
         lst = []
-        for i in range(0,shape[0] * shape[1]):
+        for i in range(0, shape[0] * shape[1]):
             lst.append(random.random())
         return np.array(lst).reshape(shape)
 
@@ -51,5 +50,4 @@ class NumPyCreator:
             line = [0] * n
             line[i] = 1
             columns.append(line)
-        return np.array(columns).reshape(n,n)
-
+        return np.array(columns).reshape(n, n)
