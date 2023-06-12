@@ -5,10 +5,20 @@ import random
 
 class NumPyCreator:
     def from_list(self, lst):
-        return np.array(lst)
+        if not isinstance(lst, list):
+            return None
+        try:
+            return np.array(lst)
+        except:
+            return None
 
     def from_tuple(self, tpl):
-        return np.array(tpl)
+        if not isinstance(tpl, tuple):
+            return None
+        try:
+            return np.array(tpl)
+        except:
+            return None
 
     def from_iterable(self, itr):
         lst = []
@@ -32,7 +42,7 @@ class NumPyCreator:
             sys.exit()
         lst = []
         for i in range(0,shape[0] * shape[1]):
-            lst.append(random.randint(0,100))
+            lst.append(random.random())
         return np.array(lst).reshape(shape)
 
     def identity(self, n):
