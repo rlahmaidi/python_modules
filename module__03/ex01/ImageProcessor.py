@@ -2,7 +2,7 @@
 
 class ImageProcessor:
     def load(path):
-        
+        pass
 
 
 #  load(path): opens the PNG file specified by the path argument and returns an
