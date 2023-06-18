@@ -1,5 +1,6 @@
 from time import sleep, time
 from timeit import timeit
+from random import randint
 # from math import rand
 
 def timer(listy):
@@ -7,15 +8,19 @@ def timer(listy):
         yield element
 
 def ft_progress(listy):
-    eta = timeit(stmt= 'timer(listy)', globals=globals(), number= 1000)
+    eta = timeit(stmt= 'ft_progress(listy)', globals=globals(), number= 1000)
     # text = "ETA: " + str(eta) + "[ "
     begin = time()
     i = 0
-    # flesh = "=>"
+    flesh = "=>"
     for e in listy:
         text = "ETA: " + "{:.5f}".format(eta) + "s [ "
         percent = (i / len(listy)) * 100
-        text += str(percent) + "%]" + str(i) + "/" + str(len(listy))
+        text += str(percent) + "%]" + " ["
+        if randint(0,1000) > 990 :
+            flesh = '=' + flesh
+        text += flesh + " ] "
+        text += str(i) + "/" + str(len(listy))
         inter_time = time() - begin
         text += " | elapsed time " + "{:.5f}".format(inter_time)
         # here i should add flessh
@@ -32,10 +37,10 @@ def ft_progress(listy):
 
 
 
-listy = range(10)
+listy = range(1000)
 ret = 0
 for elem in ft_progress(listy):
     ret += (elem + 3) % 5
     sleep(0.01)
-# print()
+print()
 print(ret)
